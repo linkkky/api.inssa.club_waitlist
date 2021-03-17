@@ -3,12 +3,16 @@ package test
 import (
 	"bytes"
 	"encoding/json"
+	"inssa_club_waitlist_backend/cmd/server/errors"
+	"inssa_club_waitlist_backend/cmd/server/forms"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tj/assert"
 )
 
 var engine *gin.Engine
@@ -33,3 +37,16 @@ func responseToMap(body *bytes.Buffer, resultMap *map[string]interface{}) {
 }
 
 // helper functions for easier request
+
+func requestInterestWithoutEmailTest(t *testing.T) {
+	var response map[string]interface{}
+
+	form := &forms.AddInterest{
+		UserID: "123",
+	}
+
+	w := performRequestWithForm(engine, "POST", "/interest", form)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
+	responseToMap(w.Body, &response)
+	assert.Equal(t, errors.ValidationError, response["errorType"])
+}
