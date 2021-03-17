@@ -40,3 +40,17 @@ func (ctrler *Controller) AddInterest(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, interest)
 }
+
+func (ctrl *Controller) DeleteInterest(c *gin.Context) {
+	var form forms.DeleteInterest
+
+	db := utils.GetDB().Instance
+	if err := c.ShouldBindJSON(&form); err != nil {
+		utils.AbortWithErrorResponse(c, http.StatusBadRequest, errors.ValidationError, err.Error())
+		return
+	}
+
+	db.Where("email = ?", form.Email).Delete(&models.Interest{})
+
+	c.Status(200)
+}
