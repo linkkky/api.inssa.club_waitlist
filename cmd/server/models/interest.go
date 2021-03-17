@@ -1,6 +1,8 @@
 package models
 
 import (
+	"gopkg.in/guregu/null.v4"
+
 	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
@@ -8,9 +10,8 @@ import (
 // Interest is a model, which is the entity of waitlist
 type Interest struct {
 	gorm.Model
-	ID              uint64 `gorm:"primary_key" example:"3"`
-	ClubhouseUserID uint64 `gorm:"column:clubhouse_user_id;unique;" example:"123456"`
-	Email           string `gorm:"column:email;unique;not null" valid:"email, required" example:"example@example.com"`
+	ClubhouseUserID null.Int `json:"clubhouse_user_id" gorm:"column:clubhouse_user_id;unique;" example:"123456"`
+	Email           string   `json:"email" gorm:"column:email;unique;not null" valid:"email, required" example:"example@example.com"`
 }
 
 func (interest *Interest) Create(db *gorm.DB) error {
