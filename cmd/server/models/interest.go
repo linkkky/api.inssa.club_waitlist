@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
 
@@ -12,4 +13,11 @@ type Interest struct {
 	Email           string `gorm:"column:email;unique;not null" valid:"email" example:"example@example.com"`
 }
 
+func (interest *Interest) Create(db *gorm.DB) error {
+	isValid, err := govalidator.ValidateStruct(interest)
+	if isValid {
+		db.Create(&interest)
+		return nil
+	}
+	return err
 }
