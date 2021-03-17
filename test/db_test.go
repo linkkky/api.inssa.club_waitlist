@@ -14,3 +14,9 @@ func TestDBSingleton(t *testing.T) {
 
 	assert.Equal(t, true, db1.Instance == db2.Instance)
 }
+
+func TestDBSetup(t *testing.T) {
+	db := utils.GetDB()
+	db.SetupDB()
+	db.Instance.Exec("DELETE FROM interests") // reset db data
+}
