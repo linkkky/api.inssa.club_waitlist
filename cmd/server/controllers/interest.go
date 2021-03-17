@@ -11,6 +11,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Add to interest list (= waitlist)
+// @Description add to interest list (= waitlist)
+// @Accept json
+// @Produce json
+// @Param clubhouse_user_id path int false "UserID of Clubhouse Profile"
+// @Param email path string true "Email address to get notification"
+// @Success 201 {object} forms.AddInterestResponseDocument
+// @Failure 400 {object} forms.ErrorResponse
+// @Router /interest [post]
 func (ctrler *Controller) AddInterest(c *gin.Context) {
 	var form forms.AddInterestRequest
 	var count int64
@@ -42,6 +51,15 @@ func (ctrler *Controller) AddInterest(c *gin.Context) {
 	c.JSON(http.StatusCreated, response)
 }
 
+// @Summary Delete from interest list (= waitlist)
+// @Description Soft delete from interest list (= waitlist)
+// @Accept json
+// @Produce json
+// @Param email path string true "Email address to get notification"
+// @Success 200
+// @Failure 400 {object} forms.ErrorResponse
+// @Failure 404
+// @Router /interest [delete]
 func (ctrl *Controller) DeleteInterest(c *gin.Context) {
 	var form forms.DeleteInterest
 	var count int64
