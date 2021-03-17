@@ -14,6 +14,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/tj/assert"
+	"gopkg.in/guregu/null.v4"
 )
 
 var engine *gin.Engine
@@ -43,7 +44,7 @@ func requestInterestWithoutEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
 	form := &forms.AddInterest{
-		UserID: "123",
+		ClubhouseUserID: null.NewInt(123, true),
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
@@ -56,8 +57,8 @@ func requestInterestWithoutProperEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
 	form := &forms.AddInterest{
-		Email:  "example",
-		UserID: "123",
+		ClubhouseUserID: null.NewInt(123, true),
+		Email:           "example",
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
@@ -68,6 +69,7 @@ func requestInterestWithoutProperEmailTest(t *testing.T) {
 
 func requestInterest(t *testing.T) {
 	form := &forms.AddInterest{
+		ClubhouseUserID: null.NewInt(123, true),
 		Email:  "example",
 		UserID: "123",
 	}
@@ -80,8 +82,7 @@ func requestInterestWithDuplicateEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
 	form := &forms.AddInterest{
-		Email:  "example@example.com",
-		UserID: "123",
+		ClubhouseUserID: null.NewInt(123, true),
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
