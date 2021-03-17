@@ -8,6 +8,7 @@ import (
 	"inssa_club_waitlist_backend/configs"
 
 	"github.com/apex/gateway"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
 	swaggerFiles "github.com/swaggo/files"
@@ -46,6 +47,7 @@ func runServer(engine *gin.Engine) {
 }
 
 func main() {
+	govalidator.SetFieldsRequiredByDefault(false)
 	utils.InitDB()
 	engine := gin.New()
 	middlewares.Setup(engine)
