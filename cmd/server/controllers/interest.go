@@ -12,7 +12,7 @@ import (
 )
 
 func (ctrler *Controller) AddInterest(c *gin.Context) {
-	var form forms.AddInterest
+	var form forms.AddInterestRequest
 	var count int64
 	db := utils.GetDB().Instance
 
