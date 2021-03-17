@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"inssa_club_waitlist_backend/cmd/server/errors"
 	"inssa_club_waitlist_backend/cmd/server/forms"
+	"inssa_club_waitlist_backend/cmd/server/routes"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -99,3 +100,10 @@ func deleteInterest(t *testing.T) {
 }
 
 // test interest
+
+func TestSetupRouter(t *testing.T) {
+	engine = gin.New()
+	for _, controller := range routes.GetRoutes() {
+		engine.Handle(controller.Method, controller.Path, controller.Handler)
+	} // setup routes
+}
