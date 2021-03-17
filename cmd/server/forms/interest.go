@@ -1,6 +1,8 @@
 package forms
 
-import "gopkg.in/guregu/null.v4"
+import (
+	"gopkg.in/guregu/null.v4"
+)
 
 // AddInterestRequest is a struct for adding interest request
 type AddInterestRequest struct {
@@ -10,7 +12,7 @@ type AddInterestRequest struct {
 
 // AddInterestResponse is a struct for adding interest response
 type AddInterestResponse struct {
-	ID              int64
+	ID              uint
 	ClubhouseUserID null.Int `json:"clubhouse_user_id" valid:"optional"`
 	Email           string   `json:"email" valid:"email, required" binding:"required"`
 }
