@@ -7,6 +7,10 @@ type AddInterestRequest struct {
 	ClubhouseUserID null.Int `json:"clubhouse_user_id" valid:"optional"`
 	Email           string   `json:"email" valid:"email, required" binding:"required"`
 }
+
+// AddInterestResponse is a struct for adding interest response
+type AddInterestResponse struct {
+	ID              int64
 	ClubhouseUserID null.Int `json:"clubhouse_user_id" valid:"optional"`
 	Email           string   `json:"email" valid:"email, required" binding:"required"`
 }
