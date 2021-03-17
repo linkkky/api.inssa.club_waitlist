@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"inssa_club_waitlist_backend/cmd/server/controllers"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +15,9 @@ type RouteInfo struct {
 
 // GetRoutes is a function which returns the information of routes
 func GetRoutes() []RouteInfo {
-	routeInfo := []RouteInfo{}
+	controller := controllers.Controller{}
+	routeInfo := []RouteInfo{
+		{Method: "POST", Path: "/interest", Handler: controller.AddInterest},
+	}
 	return routeInfo
 }
