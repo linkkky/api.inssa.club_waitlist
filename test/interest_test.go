@@ -88,3 +88,14 @@ func requestInterestWithDuplicateEmailTest(t *testing.T) {
 	responseToMap(w.Body, &response)
 	assert.Equal(t, errors.DuplicateEmailError, response["errorType"])
 }
+
+func deleteInterest(t *testing.T) {
+	form := &forms.AddInterest{
+		Email: "example@example.com",
+	}
+
+	w := performRequestWithForm(engine, "DELETE", "/interest", form)
+	assert.Equal(t, http.StatusOK, w.Code)
+}
+
+// test interest
