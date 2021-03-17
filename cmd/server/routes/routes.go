@@ -18,6 +18,7 @@ func GetRoutes() []RouteInfo {
 	controller := controllers.Controller{}
 	routeInfo := []RouteInfo{
 		{Method: "POST", Path: "/interest", Handler: controller.AddInterest},
+		{Method: "DELETE", Path: "/interest", Handler: controller.DeleteInterest},
 	}
 	return routeInfo
 }
