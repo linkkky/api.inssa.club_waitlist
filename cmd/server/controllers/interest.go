@@ -52,6 +52,13 @@ func (ctrl *Controller) DeleteInterest(c *gin.Context) {
 		return
 	}
 
+	db.Model(&models.Interest{}).Where("email = ?", form.Email).Count(&count)
+	if count == 0 {
+		c.AbortWithStatus(404)
+		return
+	}
+	// check unique
+
 	db.Where("email = ?", form.Email).Delete(&models.Interest{})
 
 	c.Status(200)
