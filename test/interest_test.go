@@ -50,3 +50,17 @@ func requestInterestWithoutEmailTest(t *testing.T) {
 	responseToMap(w.Body, &response)
 	assert.Equal(t, errors.ValidationError, response["errorType"])
 }
+
+func requestInterestWithoutProperEmailTest(t *testing.T) {
+	var response map[string]interface{}
+
+	form := &forms.AddInterest{
+		Email:  "example",
+		UserID: "123",
+	}
+
+	w := performRequestWithForm(engine, "POST", "/interest", form)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
+	responseToMap(w.Body, &response)
+	assert.Equal(t, errors.ValidationError, response["errorType"])
+}
