@@ -7,5 +7,6 @@ import (
 )
 
 func Test(t *testing.T) {
-	assert.Equal(t, true, 1 == 1)
+	x1 := 1
+	assert.Equal(t, true, x1 == 1)
 }
