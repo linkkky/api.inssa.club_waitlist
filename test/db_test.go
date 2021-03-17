@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/tj/assert"
+	"gopkg.in/guregu/null.v4"
 )
 
 func TestDBSingleton(t *testing.T) {
@@ -24,7 +25,7 @@ func TestDBSetup(t *testing.T) {
 }
 
 func TestRecordCreation(t *testing.T) {
-	const CLUBHOUSE_USER_ID = 1234
+	CLUBHOUSE_USER_ID := null.NewInt(1234, true)
 	const EMAIL = "code.yeon.gyu@gmail.com"
 	db := utils.GetDB()
 	db.SetupDB()
