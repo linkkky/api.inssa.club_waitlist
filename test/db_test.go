@@ -24,10 +24,10 @@ func TestDBSetup(t *testing.T) {
 }
 
 func TestRecordCreation(t *testing.T) {
-	db := utils.GetDB()
-	db.SetupDB()
 	const CLUBHOUSE_USER_ID = 1234
 	const EMAIL = "code.yeon.gyu@gmail.com"
+	db := utils.GetDB()
+	db.SetupDB()
 
 	interest := models.Interest{ClubhouseUserID: CLUBHOUSE_USER_ID, Email: EMAIL}
 	db.Instance.Create(&interest)
