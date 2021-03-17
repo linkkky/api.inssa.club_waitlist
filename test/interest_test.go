@@ -107,3 +107,13 @@ func TestSetupRouter(t *testing.T) {
 		engine.Handle(controller.Method, controller.Path, controller.Handler)
 	} // setup routes
 }
+
+func TestInterest(t *testing.T) {
+	t.Run("Test interest feature", func(t *testing.T) {
+		t.Run("Request interest without email should fail", requestInterestWithoutEmailTest)
+		t.Run("Request interest without proper email should fail", requestInterestWithoutProperEmailTest)
+		t.Run("Request with proper email, user id should success", requestInterest)
+		t.Run("Request interest with duplicate email should fail", requestInterestWithDuplicateEmailTest)
+		t.Run("Request delete an interest should success", deleteInterest)
+	})
+}
