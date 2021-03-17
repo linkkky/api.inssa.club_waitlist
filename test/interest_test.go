@@ -70,8 +70,7 @@ func requestInterestWithoutProperEmailTest(t *testing.T) {
 func requestInterest(t *testing.T) {
 	form := &forms.AddInterest{
 		ClubhouseUserID: null.NewInt(123, true),
-		Email:  "example",
-		UserID: "123",
+		Email:           "example@example.com",
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
@@ -83,6 +82,7 @@ func requestInterestWithDuplicateEmailTest(t *testing.T) {
 
 	form := &forms.AddInterest{
 		ClubhouseUserID: null.NewInt(123, true),
+		Email:           "example@example.com",
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
