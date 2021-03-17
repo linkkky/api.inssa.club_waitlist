@@ -74,3 +74,17 @@ func requestInterest(t *testing.T) {
 	w := performRequestWithForm(engine, "POST", "/interest", form)
 	assert.Equal(t, http.StatusCreated, w.Code)
 }
+
+func requestInterestWithDuplicateEmailTest(t *testing.T) {
+	var response map[string]interface{}
+
+	form := &forms.AddInterest{
+		Email:  "example@example.com",
+		UserID: "123",
+	}
+
+	w := performRequestWithForm(engine, "POST", "/interest", form)
+	assert.Equal(t, http.StatusBadRequest, w.Code)
+	responseToMap(w.Body, &response)
+	assert.Equal(t, errors.DuplicateEmailError, response["errorType"])
+}
