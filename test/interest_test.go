@@ -44,20 +44,20 @@ func responseToMap(body *bytes.Buffer, resultMap *map[string]interface{}) {
 func requestInterestWithoutEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
-	form := &forms.AddInterest{
+	form := &forms.AddInterestRequest{
 		ClubhouseUserID: null.NewInt(123, true),
 	}
 
 	w := performRequestWithForm(engine, "POST", "/interest", form)
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	responseToMap(w.Body, &response)
-	assert.Equal(t, errors.ValidationError, response["errorType"])
+	assert.Equal(t, errors.ValidationError, response["error_type"])
 }
 
 func requestInterestWithoutProperEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
-	form := &forms.AddInterest{
+	form := &forms.AddInterestRequest{
 		ClubhouseUserID: null.NewInt(123, true),
 		Email:           "example",
 	}
@@ -65,11 +65,11 @@ func requestInterestWithoutProperEmailTest(t *testing.T) {
 	w := performRequestWithForm(engine, "POST", "/interest", form)
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	responseToMap(w.Body, &response)
-	assert.Equal(t, errors.ValidationError, response["errorType"])
+	assert.Equal(t, errors.ValidationError, response["error_type"])
 }
 
 func requestInterest(t *testing.T) {
-	form := &forms.AddInterest{
+	form := &forms.AddInterestRequest{
 		ClubhouseUserID: null.NewInt(123, true),
 		Email:           "example@example.com",
 	}
@@ -81,7 +81,7 @@ func requestInterest(t *testing.T) {
 func requestInterestWithDuplicateEmailTest(t *testing.T) {
 	var response map[string]interface{}
 
-	form := &forms.AddInterest{
+	form := &forms.AddInterestRequest{
 		ClubhouseUserID: null.NewInt(123, true),
 		Email:           "example@example.com",
 	}
@@ -89,11 +89,11 @@ func requestInterestWithDuplicateEmailTest(t *testing.T) {
 	w := performRequestWithForm(engine, "POST", "/interest", form)
 	assert.Equal(t, http.StatusBadRequest, w.Code)
 	responseToMap(w.Body, &response)
-	assert.Equal(t, errors.DuplicateEmailError, response["errorType"])
+	assert.Equal(t, errors.DuplicateEmailError, response["error_type"])
 }
 
 func deleteInterest(t *testing.T) {
-	form := &forms.AddInterest{
+	form := &forms.AddInterestRequest{
 		Email: "example@example.com",
 	}
 
