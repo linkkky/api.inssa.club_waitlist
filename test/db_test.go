@@ -5,6 +5,7 @@ import (
 	"inssa_club_waitlist_backend/cmd/server/utils"
 	"testing"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/tj/assert"
 )
 
