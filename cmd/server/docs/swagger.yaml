@@ -1,4 +1,74 @@
+definitions:
+  forms.AddInterestResponseDocument:
+    properties:
+      clubhouse_user_id:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+    required:
+    - email
+    type: object
+  forms.ErrorResponse:
+    properties:
+      detail:
+        type: string
+      error_type:
+        type: string
+      message:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /interest:
+    delete:
+      consumes:
+      - application/json
+      description: Soft delete from interest list (= waitlist)
+      parameters:
+      - description: Email address to get notification
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/forms.ErrorResponse'
+        "404":
+          description: ""
+      summary: Delete from interest list (= waitlist)
+    post:
+      consumes:
+      - application/json
+      description: add to interest list (= waitlist)
+      parameters:
+      - description: UserID of Clubhouse Profile
+        in: path
+        name: clubhouse_user_id
+        type: integer
+      - description: Email address to get notification
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/forms.AddInterestResponseDocument'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/forms.ErrorResponse'
+      summary: Add to interest list (= waitlist)
 swagger: "2.0"
