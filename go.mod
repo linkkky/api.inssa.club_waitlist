@@ -15,6 +15,7 @@ require (
 	github.com/swaggo/swag v1.7.0
 	github.com/tj/assert v0.0.3
 	github.com/toorop/gin-logrus v0.0.0-20210225092905-2c785434f26f
+	gopkg.in/guregu/null.v4 v4.0.0
 	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 	gorm.io/driver/postgres v1.0.8
 	gorm.io/gorm v1.21.3
