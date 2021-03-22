@@ -27,11 +27,11 @@ func setupRoutes(engine *gin.Engine) {
 }
 
 func setupDocuments() {
-	docs.SwaggerInfo.Title = "waitlist-api.inssa.club"
+	docs.SwaggerInfo.Title = "waitlist.api.inssa.club"
 	docs.SwaggerInfo.Description = "The REST API for waitlist service of api.inssa.club"
-	docs.SwaggerInfo.Host = "api.inssa.club"
+	docs.SwaggerInfo.Host = "waitlist.api.inssa.club"
 	docs.SwaggerInfo.Version = "0.1"
-	docs.SwaggerInfo.BasePath = "/waitlist"
+	docs.SwaggerInfo.BasePath = "/"
 	docs.SwaggerInfo.Schemes = []string{"https"}
 }
 
