@@ -19,5 +19,11 @@ var Envs = map[string]string{
 	"IS_ENABLE_SWAGGER": getEnv("IS_ENABLE_SWAGGER", "true"),
 	"IS_SERVERLESS":     getEnv("IS_SERVERLESS", "false"),
 	"SERVER_PORT":       getEnv("PORT", "8080"),
-	"PSQL_URI":          getEnv("PSQL_URI", "host=localhost user=postgres password=1234 dbname=database port=5432 sslmode=disable TimeZone=Asia/Seoul"),
+	"PSQL_HOST":         getEnv("PSQL_HOST", "localhost"),
+	"PSQL_PORT":         getEnv("PSQL_PORT", "5432"),
+	"PSQL_USER":         getEnv("PSQL_USER", "postgres"),
+	"PSQL_PASSWORD":     getEnv("PSQL_PASSWORD", "1234"),
+	"PSQL_DBNAME":       getEnv("PSQL_DBNAME", "database"),
+	"PSQL_TIMEZONE":     getEnv("PSQL_TIMEZONE", "Asia/Seoul"),
+	"PSQL_SSLMODE":      getEnv("PSQL_SSLMODE", "disable"),
 }
