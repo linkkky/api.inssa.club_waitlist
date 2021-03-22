@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"inssa_club_waitlist_backend/cmd/server/models"
 	"inssa_club_waitlist_backend/configs"
 	"sync"
@@ -27,7 +28,8 @@ func GetDB() *DBManager {
 
 // SetupDB setups the gorm DB configuration using the values from the environment
 func (m *DBManager) SetupDB() {
-	dsn := configs.Envs["PSQL_URI"]
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
+		configs.Envs["PSQL_HOST"], configs.Envs["PSQL_USER"], configs.Envs["PSQL_PASSWORD"], configs.Envs["PSQL_DBNAME"], configs.Envs["PSQL_PORT"], configs.Envs["PSQL_SSLMODE"], configs.Envs["PSQL_TIMEZONE"])
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
