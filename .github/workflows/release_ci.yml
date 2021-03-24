@@ -16,7 +16,11 @@ jobs:
             postgres:
                 image: postgres
                 env:
+                    POSTGRES_USER: postgres
                     POSTGRES_PASSWORD: 1234
+                    POSTGRES_DB: database
+                ports:
+                    - 5432:5432
                 options: >-
                     --health-cmd pg_isready
                     --health-interval 10s
@@ -33,6 +37,7 @@ jobs:
               run: go test -v ./...
 
     build:
+        needs: [test]
         name: Build
         runs-on: ubuntu-latest
         steps:
@@ -63,7 +68,7 @@ jobs:
                   tags: ${{env.DOCKER_IMAGE}}:${{env.VERSION}}
 
     deploy:
-        needs: build
+        needs: [test, build]
         name: Deploy
         runs-on: [self-hosted, production]
         steps:
@@ -85,7 +90,7 @@ jobs:
                   inssa_waitlist
 
     cleanup:
-        needs: [build, deploy]
+        needs: [test, build, deploy]
         name: Clean Up
         runs-on: [self-hosted, production]
         steps:
