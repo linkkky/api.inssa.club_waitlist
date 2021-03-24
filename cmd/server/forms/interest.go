@@ -23,10 +23,13 @@ type AddInterestRequestDocument struct {
 	ClubhouseUserID int64  `json:"clubhouse_user_id" valid:"optional" example:"1234"`
 	Email           string `json:"email" valid:"email, required" binding:"required" example:"example@example.com"`
 }
+
+// AddInterestResponseDocument is the same as AddInterestResponse
+// but its nullable types are replaced with golang's types
 type AddInterestResponseDocument struct {
-	ID              uint
-	ClubhouseUserID int64  `json:"clubhouse_user_id" valid:"optional"`
-	Email           string `json:"email" valid:"email, required" binding:"required"`
+	ID              uint   `json:"id" example:"0"`
+	ClubhouseUserID int64  `json:"clubhouse_user_id" valid:"optional" example:"1234"`
+	Email           string `json:"email" valid:"email, required" binding:"required" example:"example@example.com"`
 }
 
 // DeleteInterest is a struct for deleting interest request
