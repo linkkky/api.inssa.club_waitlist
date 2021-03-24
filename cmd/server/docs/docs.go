@@ -36,17 +36,13 @@ var doc = `{
                 "summary": "Add to interest list (= waitlist)",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "UserID of Clubhouse Profile",
-                        "name": "clubhouse_user_id",
-                        "in": "path"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Email address to get notification",
-                        "name": "email",
-                        "in": "path",
-                        "required": true
+                        "description": "json body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/forms.AddInterestRequestDocument"
+                        }
                     }
                 ],
                 "responses": {
@@ -75,11 +71,13 @@ var doc = `{
                 "summary": "Delete from interest list (= waitlist)",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Email address to get notification",
-                        "name": "email",
-                        "in": "path",
-                        "required": true
+                        "description": "json body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/forms.DeleteInterest"
+                        }
                     }
                 ],
                 "responses": {
@@ -100,6 +98,22 @@ var doc = `{
         }
     },
     "definitions": {
+        "forms.AddInterestRequestDocument": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "clubhouse_user_id": {
+                    "type": "integer",
+                    "example": 1234
+                },
+                "email": {
+                    "type": "string",
+                    "example": "example@example.com"
+                }
+            }
+        },
         "forms.AddInterestResponseDocument": {
             "type": "object",
             "required": [
@@ -107,13 +121,27 @@ var doc = `{
             ],
             "properties": {
                 "clubhouse_user_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 1234
                 },
                 "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "example@example.com"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 0
+                }
+            }
+        },
+        "forms.DeleteInterest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
                 }
             }
         },

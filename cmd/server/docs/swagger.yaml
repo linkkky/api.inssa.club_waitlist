@@ -1,12 +1,33 @@
 definitions:
+  forms.AddInterestRequestDocument:
+    properties:
+      clubhouse_user_id:
+        example: 1234
+        type: integer
+      email:
+        example: example@example.com
+        type: string
+    required:
+    - email
+    type: object
   forms.AddInterestResponseDocument:
     properties:
       clubhouse_user_id:
+        example: 1234
         type: integer
       email:
+        example: example@example.com
         type: string
       id:
+        example: 0
         type: integer
+    required:
+    - email
+    type: object
+  forms.DeleteInterest:
+    properties:
+      email:
+        type: string
     required:
     - email
     type: object
@@ -28,11 +49,12 @@ paths:
       - application/json
       description: Soft delete from interest list (= waitlist)
       parameters:
-      - description: Email address to get notification
-        in: path
-        name: email
+      - description: json body
+        in: body
+        name: body
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/forms.DeleteInterest'
       produces:
       - application/json
       responses:
@@ -50,15 +72,12 @@ paths:
       - application/json
       description: add to interest list (= waitlist)
       parameters:
-      - description: UserID of Clubhouse Profile
-        in: path
-        name: clubhouse_user_id
-        type: integer
-      - description: Email address to get notification
-        in: path
-        name: email
+      - description: json body
+        in: body
+        name: body
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/forms.AddInterestRequestDocument'
       produces:
       - application/json
       responses:
