@@ -15,8 +15,7 @@ import (
 // @Description add to interest list (= waitlist)
 // @Accept json
 // @Produce json
-// @Param clubhouse_user_id path int false "UserID of Clubhouse Profile"
-// @Param email path string true "Email address to get notification"
+// @Param body body forms.AddInterestRequestDocument true "json body"
 // @Success 201 {object} forms.AddInterestResponseDocument
 // @Failure 400 {object} forms.ErrorResponse
 // @Router /interest [post]
@@ -55,7 +54,7 @@ func (ctrler *Controller) AddInterest(c *gin.Context) {
 // @Description Soft delete from interest list (= waitlist)
 // @Accept json
 // @Produce json
-// @Param email path string true "Email address to get notification"
+// @Param body body forms.DeleteInterest true "json body"
 // @Success 200
 // @Failure 400 {object} forms.ErrorResponse
 // @Failure 404
