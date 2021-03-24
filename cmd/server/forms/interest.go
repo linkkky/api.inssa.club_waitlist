@@ -17,8 +17,12 @@ type AddInterestResponse struct {
 	Email           string   `json:"email" valid:"email, required" binding:"required"`
 }
 
-// AddInterestResponseDocumentation is the same as AddInterestResponse
-//but its nullable types are replaced with golang's stock types
+// AddInterestRequestDocument is the same as AddInterestRequest
+// but its nullable types are replaced with golang's types
+type AddInterestRequestDocument struct {
+	ClubhouseUserID int64  `json:"clubhouse_user_id" valid:"optional" example:"1234"`
+	Email           string `json:"email" valid:"email, required" binding:"required" example:"example@example.com"`
+}
 type AddInterestResponseDocument struct {
 	ID              uint
 	ClubhouseUserID int64  `json:"clubhouse_user_id" valid:"optional"`
