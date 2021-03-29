@@ -1,3 +1,5 @@
+![Release CI Status](https://github.com/linkkky/api.inssa.club_waitlist/actions/workflows/release_ci.yml/badge.svg)
+
 # api.inssa.club_waitlist
 
 api.inssa.club의 waitlist 관련 서비스입니다.  
